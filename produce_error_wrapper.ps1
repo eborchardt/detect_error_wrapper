@@ -2,7 +2,8 @@
 $exePath = ".\produce_error.exe"
 
 # Run the executable and capture its output
-$output = & $exePath
+$output = $null
+$output += & $exePath
 
 # Define the specific text to detect in the output
 $textToDetect = "Process completed with error(s)."
