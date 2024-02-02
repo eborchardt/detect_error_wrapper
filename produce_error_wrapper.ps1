@@ -4,8 +4,19 @@ $exePath = ".\produce_error.exe"
 # Initialize StringBuilder
 $outputBuilder = [System.Text.StringBuilder]::new()
 
-# Run the executable and append the output to the StringBuilder
-$outputBuilder.Append((Get-Content <( & $exePath ) -Raw))
+# Start the process
+$process = New-Object System.Diagnostics.Process
+$process.StartInfo.FileName = $exePath
+$process.StartInfo.RedirectStandardOutput = $true
+$process.StartInfo.UseShellExecute = $false
+$process.StartInfo.CreateNoWindow = $true
+$process.Start()
+
+# Read the output and append it to the StringBuilder
+$outputBuilder.Append($process.StandardOutput.ReadToEnd())
+
+# Wait for the process to complete
+$process.WaitForExit()
 
 # Convert the StringBuilder to a string when needed
 $output = $outputBuilder.ToString()
