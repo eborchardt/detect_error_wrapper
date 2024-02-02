@@ -1,9 +1,14 @@
 ﻿# Define the path to the executable
 $exePath = ".\produce_error.exe"
 
-# Run the executable and capture its output
-$output = $null
-$output += & $exePath
+# Initialize StringBuilder
+$outputBuilder = [System.Text.StringBuilder]::new()
+
+# Run the executable and append the output to the StringBuilder
+$outputBuilder.Append(& $exePath)
+
+# Convert the StringBuilder to a string when needed
+$output = $outputBuilder.ToString()
 
 # Define the specific text to detect in the output
 $textToDetect = "Process completed with error(s)."
