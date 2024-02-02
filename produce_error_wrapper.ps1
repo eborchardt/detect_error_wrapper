@@ -15,6 +15,7 @@ if ($output -match [regex]::Escape($textToDetect)) {
     $exitCode = 1
 } else {
     Write-Host "Text not detected: $textToDetect"
+        Write-Host "Detected Output: $output"
     
     # Set the exit code to zero (success)
     $exitCode = 0
